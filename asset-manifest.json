@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/skribbl/static/css/main.6e8ae5ac.chunk.css",
+    "main.js": "/skribbl/static/js/main.f680db17.chunk.js",
+    "main.js.map": "/skribbl/static/js/main.f680db17.chunk.js.map",
+    "runtime-main.js": "/skribbl/static/js/runtime-main.0cb7a06d.js",
+    "runtime-main.js.map": "/skribbl/static/js/runtime-main.0cb7a06d.js.map",
+    "static/js/2.f70a6cf3.chunk.js": "/skribbl/static/js/2.f70a6cf3.chunk.js",
+    "static/js/2.f70a6cf3.chunk.js.map": "/skribbl/static/js/2.f70a6cf3.chunk.js.map",
+    "index.html": "/skribbl/index.html",
+    "static/css/main.6e8ae5ac.chunk.css.map": "/skribbl/static/css/main.6e8ae5ac.chunk.css.map",
+    "static/js/2.f70a6cf3.chunk.js.LICENSE.txt": "/skribbl/static/js/2.f70a6cf3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0cb7a06d.js",
+    "static/js/2.f70a6cf3.chunk.js",
+    "static/css/main.6e8ae5ac.chunk.css",
+    "static/js/main.f680db17.chunk.js"
+  ]
+}
