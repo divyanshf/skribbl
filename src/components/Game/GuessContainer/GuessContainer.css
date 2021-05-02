@@ -1,0 +1,35 @@
+.guess-container{
+    min-width: 200px;
+    width: 25vw;
+    background-color: white;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.guess-list{
+    height: 100%;
+    overflow-y: auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.input-container{
+    height: 2.5rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.guess-input{
+    width: 100%;
+    outline: none;
+    padding: 0;
+    padding-left: 10px;
+    height: 2rem;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}

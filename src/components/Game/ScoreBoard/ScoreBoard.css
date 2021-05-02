@@ -1,0 +1,21 @@
+.score-board{
+    overflow-y: auto;
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+}
+.scores{
+    text-align: center;
+}
+.score-card{
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 10px auto;
+    border-radius: 10px;
+    justify-content: space-around;
+}
+.score-card h1{
+    margin: 10px;
+    font-weight: 200;
+}

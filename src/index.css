@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root{
+    --gap: 5px;
+}
+
+body{
+    background-color: #00537a;
+    background-image: url("https://www.transparenttextures.com/patterns/food.png");
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgba(189, 189, 189, 0.8);
+    border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: rgba(189, 189, 189, 1);
+}
+::-webkit-scrollbar-track{
+    background-color: transparent;
+}

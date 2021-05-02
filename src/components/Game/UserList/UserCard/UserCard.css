@@ -1,0 +1,27 @@
+.card-container{
+    width: 100%;
+    margin-bottom: 2px;
+    background: white;
+    list-style-type: none;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.card-container h3{
+    margin:0;
+    padding: 5px;
+}
+
+#user-name{
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-right: 5px;
+    color: rgb(78, 78, 78);
+}
+
+#user-score{
+    color: green;
+}

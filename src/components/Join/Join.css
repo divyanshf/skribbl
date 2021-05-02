@@ -1,0 +1,82 @@
+.outer-container{
+}
+
+#title{
+    font-family: 'Gloria Hallelujah', cursive;
+    user-select: none;
+}
+
+.title-span{
+    position: relative;
+    display: inline-block;
+    /* animation: rotate 0.5s linear infinite alternate; */
+}
+.title-span::after{
+    content: attr(data-content);
+    position: absolute;
+    left: 5px;
+    z-index: -1;
+    color: black;
+    animation: shake 0.25s steps(2) infinite alternate forwards;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-form{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#login-form input{
+    padding: 1rem;
+    font-size: 15px;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+#login-form input:focus{
+    border: 1px solid #00537a;
+}
+
+#play{
+    background-color: #00537a;
+    border:none;
+    border-radius: 5px;
+    padding: 1rem;
+    color: white;
+    cursor: pointer;
+}
+
+.mt-10{
+    margin-top: 10px;
+}
+
+#error{
+    color: red;
+}
+
+@keyframes rotate {
+    0%{
+        transform: rotate(-5deg);
+    }
+    100%{
+        transform: rotate(5deg);
+    }
+}
+
+@keyframes shake {
+    0%{
+        left: -5px;
+    }
+    100%{
+        left: 5px;
+    }
+}

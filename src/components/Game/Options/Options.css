@@ -1,0 +1,65 @@
+
+.options-outer-container{
+    position: sticky;
+    left: 0;
+    overflow-x: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.options-container{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 5px;
+    padding: 5px;
+    margin: auto 0.5em;
+}
+.option-icon{
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 0.5em;
+    margin: 0.2em;
+    cursor: pointer;
+}
+.option-icon:hover{
+    background-color: black;
+    color: white;
+}
+.option-icon-active{
+    background-color: black;
+    color: white;
+}
+.color-box{
+    width: 1.2em;
+    height: 1.2em;
+    margin: 2px;
+    border: 1px solid black;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.color-box:hover{
+    transform: scale(1.2);
+    transition: 0.2s ease;
+}
+.color-box-active{
+    transform: scale(1.2);
+    transition: 0.2s ease;
+}
+.color-box-active::after{
+    content: '✔️';
+    font-size: 0.7em;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+@media screen and (max-width : 650px){
+    .options-outer-container{
+        justify-content: flex-start;
+    }
+}

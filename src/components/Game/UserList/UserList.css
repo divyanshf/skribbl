@@ -1,0 +1,9 @@
+.scores-container{
+    min-width: 200px;
+    width: 25vw;
+    margin: 0;
+    padding: 0;
+    margin-right: 10px;
+    overflow-y: auto;
+    border-radius: 5px;
+}
