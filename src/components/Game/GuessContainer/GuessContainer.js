@@ -16,7 +16,7 @@ function GuessContainer({socketRef}){
         setGuess(e.target.value.toLowerCase())
     }
     const handleGuessSubmit = (e) => {
-        if(e.code === "Enter" && guess.length > 0 && guess.trim().length > 0) {
+        if(e.which === 13 && guess.length > 0 && guess.trim().length > 0) {
             socketRef.current.emit('guess', guess.trim())
             setGuess('')
         }
