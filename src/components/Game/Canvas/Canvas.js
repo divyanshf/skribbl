@@ -1,9 +1,9 @@
 import './Canvas.css'
-import {useRef, useEffect, useState} from 'react'
+import {useRef, useEffect} from 'react'
 
 function Canvas(props){
 
-    const {socketRef, drawerId, drawing, setDrawing, canvasParent, drawBackground, drawLine, clearCanvas, eraseCanvas, setCanvas, editOption, color, time} = props
+    const {socketRef, drawerId, drawing, setDrawing, canvasParent, drawBackground, drawLine, clearCanvas, eraseCanvas, setCanvas, editOption, color} = props
     const canvasRef = useRef(null)
     const editOptionRef = useRef(editOption)
     const colorRef = useRef(color)
@@ -61,7 +61,7 @@ function Canvas(props){
             // }
         })
 
-    }, [])
+    }, [socketRef])
 
     //  Drawerid useeffect
     useEffect(() => {
@@ -69,7 +69,7 @@ function Canvas(props){
             setEventListeners(canvasRef.current, canvasRef.current.getContext('2d'))
             canvasRef.current.style.touchAction = 'none'
         }
-    }, [drawerId])
+    }, [socketRef, drawerId])
 
     //  Color / Edit Option change useEffect
     useEffect(() => {
@@ -125,13 +125,13 @@ function Canvas(props){
         canvas.addEventListener('pointerleave', e => mouseUpHandler(e, context))
         canvas.addEventListener('pointercancel', e => mouseUpHandler(e, context))
     }
-    const removeListeners = (canvas, context) => {
-        canvas.removeEventListener('pointerdown', e => mouseDownHandler(e, context))
-        canvas.removeEventListener('pointermove', e => mouseMoveHandler(e, context))
-        canvas.removeEventListener('pointerup', e => mouseUpHandler(e, context))
-        canvas.removeEventListener('pointerleave', e => mouseUpHandler(e, context))
-        canvas.removeEventListener('pointercancel', e => mouseUpHandler(e, context))
-    }
+    // const removeListeners = (canvas, context) => {
+    //     canvas.removeEventListener('pointerdown', e => mouseDownHandler(e, context))
+    //     canvas.removeEventListener('pointermove', e => mouseMoveHandler(e, context))
+    //     canvas.removeEventListener('pointerup', e => mouseUpHandler(e, context))
+    //     canvas.removeEventListener('pointerleave', e => mouseUpHandler(e, context))
+    //     canvas.removeEventListener('pointercancel', e => mouseUpHandler(e, context))
+    // }
 
     //  Event handlers
     const mouseMoveHandler = (e, context) => {
