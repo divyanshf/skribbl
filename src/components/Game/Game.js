@@ -95,7 +95,7 @@ function Game (props) {
             setTime('-')
        
             //  Set the guess list empty
-            // setGuessList([])
+            setGuessList([])
         })
         
         //  Drawer index
