@@ -41,33 +41,26 @@ function Canvas(props){
         })
 
         socketRef.current.on('drawData', ({x1, y1, x2, y2, color}) => {
-            const initial = {
-                x: x1 * canvas.width,
-                y: y1 * canvas.height
+            const data = {
+                initial:{
+                    x: x1,
+                    y: y1
+                },
+                final:{
+                    x: x2,
+                    y: y2
+                },
+                color: color
             }
-            const final = {
-                x: x2 * canvas.width,
-                y: y2 * canvas.height
-            }
-            if(final.x && final.y){
-                drawLine(ctx, canvas, color, initial, final)
-            }
-            else{
-                drawLine(ctx, canvas, color, initial)
-            }
+            setDrawing(prev => [...prev, data])
+            // if(final.x && final.y){
+            //     drawLine(ctx, canvas, color, initial, final)
+            // }
+            // else{
+            //     drawLine(ctx, canvas, color, initial)
+            // }
         })
 
-        window.addEventListener('resize', (e)=>{
-            if(canvasParent){
-                let parentWidth = canvasParent.current.clientWidth
-                let parentHeight = canvasParent.current.clientHeight
-                let smaller = parentWidth < parentHeight ? parentWidth : parentHeight
-                canvas.width = smaller
-                canvas.height = smaller
-            }
-            drawBackground(ctx, canvas)
-            drawImage(ctx, canvas)
-        })
     }, [])
 
     //  Drawerid useeffect
@@ -89,10 +82,23 @@ function Canvas(props){
         const canvas = canvasRef.current
         const ctx = canvas.getContext('2d')
         drawImage(ctx, canvas)
+
+        window.addEventListener('resize', (e)=>{
+            if(canvasParent.current){
+                let parentWidth = canvasParent.current.clientWidth
+                let parentHeight = canvasParent.current.clientHeight
+                let smaller = parentWidth < parentHeight ? parentWidth : parentHeight
+                canvas.width = smaller
+                canvas.height = smaller
+            }
+            drawBackground(canvas.getContext('2d'), canvas)
+            drawImage(canvas.getContext('2d'), canvas)
+        })
     }, [drawing])
 
     //  Draw complete
     const drawImage = (ctx, canvas) => {
+        clearCanvas(ctx, canvas)
         drawing.forEach(element => {
             const initial = {
                 x: element.initial.x * canvas.width,
