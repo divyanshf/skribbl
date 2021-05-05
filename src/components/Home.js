@@ -7,8 +7,8 @@ import { GuessListProvider } from '../context/GuessListContext'
 let socket;
 
 function Home () {
-    const ENDPOINT = '127.0.0.1:5000'
-    // const ENDPOINT = 'https://skribbl-cloned.herokuapp.com/'
+    // const ENDPOINT = '127.0.0.1:5000'
+    const ENDPOINT = 'https://skribbl-cloned.herokuapp.com/'
     const [game, setGame] = useState(false)
     const [wait, setWait] = useState(true)
     const socketRef = useRef(null)

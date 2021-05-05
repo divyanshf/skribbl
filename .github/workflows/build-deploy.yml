@@ -33,9 +33,6 @@ jobs:
     
     - name: Build
       run: CI='' npm run build
-      
-    - name: Test
-      run: npm test
     
     - name: Upload build files
       uses: actions/upload-artifact@v2
