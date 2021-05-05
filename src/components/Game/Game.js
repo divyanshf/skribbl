@@ -132,9 +132,11 @@ function Game (props) {
 
     //  Options handler
     const handleClear = (e) => {
-        clearCanvas(canvas.getContext('2d'), canvas)
-        setDrawing([])
-        socketRef.current.emit('clear')
+        if(socketRef.current.id === drawerId){
+            clearCanvas(canvas.getContext('2d'), canvas)
+            setDrawing([])
+            socketRef.current.emit('clear')
+        }
     }
 
     const handleWordSubmit = (w) => {
@@ -230,7 +232,8 @@ function Game (props) {
                 <GuessContainer socketRef={socketRef} />
 
             </div>
-            {socketRef.current.id === drawerId ? renderOptions() : null}
+            {renderOptions()}
+            {/* {socketRef.current.id === drawerId ? renderOptions() : null} */}
         </div>
     );
 
