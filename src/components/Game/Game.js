@@ -66,14 +66,6 @@ function Game (props) {
 
         //  On drawing
         socketRef.current.on('drawing', ({drawing}) => {
-            // if(canvas){
-            //     const ctx = canvas.getContext('2d')
-            //     clearCanvas(ctx, canvas)
-    
-            //     drawing.map((e) => {
-            //         drawLine(ctx, canvas, e.color, e.initial, e.final)
-            //     })
-            // }
             setDrawing(drawing)
         })
 
