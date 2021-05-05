@@ -19,13 +19,18 @@ function Game (props) {
     const {socketRef, wait, setWait} = props
     const [users, setUsers] = useContext(UsersContext)
     const [user, setUser] = useContext(UserContext)
+    const [finalScores, setFinalScores] = useState([])
     const [scoredUsers, setScoredUsers] = useState([])
-    const [turnEnd, setTurnEnd] = useState(false)
+    const [canvasStatus, setCanvasStatus] = useState('canvas')
+    // const [turnEnd, setTurnEnd] = useState(false)
+    // const [endgame, setEndgame] = useState([])
     const [drawerId, setDrawerId] = useState('')
     const [drawing, setDrawing] = useState([])
     const [words, setWords] = useState([])
     const [word, setWord] = useState('_')
     const [time, setTime] = useState('-')
+    const [rounds, setRounds] = useState(0)
+    const [totalRounds, setTotalRounds] = useState(0)
     const [editOption, setEditOption] = useState('edit')
     const [canvas, setCanvas] = useState(null)
     const [color, setColor] = useState(Colors[0])
@@ -62,6 +67,8 @@ function Game (props) {
         //  Choose a word
         socketRef.current.on('chooseWord', (words)=>{
             setWords(words)
+            setCanvasStatus('words')
+            setFinalScores([])
         })
 
         //  On drawing
@@ -74,10 +81,25 @@ function Game (props) {
             setTime(counter)
         })
         socketRef.current.on('end', (scoredUsers)=>{
-            setTurnEnd(true)
+            setCanvasStatus('end')
+            // setTurnEnd(true)
             setScoredUsers(scoredUsers)
             setDrawing([])
             setTime('-')
+        })
+
+        //  Rounds
+        socketRef.current.on('total-rounds', (totalRounds)=>{
+            setTotalRounds(totalRounds)
+        })
+        socketRef.current.on('rounds', (round) => {
+            setRounds(round)
+        })
+        socketRef.current.on('endgame', (allUsers) => {
+            setFinalScores(allUsers.sort((a, b)=>{
+                return a.score >= b.score ? -1 : 1
+            }))
+            setCanvasStatus('endgame')
         })
 
         //  Reset scores
@@ -103,7 +125,8 @@ function Game (props) {
             setDrawerId(id)
             setWord(newWord)
             setScoredUsers([])
-            setTurnEnd(false)
+            setCanvasStatus('canvas')
+            // setTurnEnd(false)
         })
 
         //  When a user leaves
@@ -195,13 +218,46 @@ function Game (props) {
 
     const renderWordOptions = () => {
         return (
-            <div className="word-options-outer-container">
+            <div className="canvas-options-outer-container">
                 <h3>Choose a word !</h3>
                 <div className="word-options-container">
                     {words.map((w, index) => <button key={index} className="word-option" onClick={()=>handleWordSubmit(w)} > {w} </button>)}
                 </div>
             </div>
         );
+    }
+
+    const renderFinalScoreCard = (u, index) => {
+        return (
+            <div key={index} className="card-flexed">
+                <h3> # {index + 1} </h3>
+                <h3> {u.username} </h3>
+                <h3> {u.score} </h3>
+            </div>
+        );
+    }
+
+    const renderFinalScores = () => {
+        return (
+            <div className="canvas-options-outer-container">
+                {finalScores.map((u, index) => renderFinalScoreCard(u, index))}
+            </div>
+        );
+    }
+
+    const renderCanvasStatus = () => {
+        switch (canvasStatus) {
+            case 'words':
+                return renderWordOptions()
+            case 'canvas':
+                return renderCanvas()
+            case 'end':
+                return renderScoreBoard()
+            case 'endgame':
+                return renderFinalScores()
+            default:
+                break;
+        }
     }
 
     if(wait){
@@ -218,7 +274,10 @@ function Game (props) {
                 <Title size='3rem' stroke='2px' align='left' />
             </nav>
             <div className="word-bar">
-                <h1 className="timer"> <FontAwesomeIcon icon={faClock} /> {time} s </h1>
+                <div className="rounds-info-container">
+                    <h1 className="timer"> <FontAwesomeIcon icon={faClock} /> {time} s </h1>
+                    <h1 className="rounds"> {rounds} / {totalRounds} </h1>
+                </div>
                 <h1 className="word"> {socketRef.current.id === drawerId ? word : getUnknownWord()} </h1>
             </div>
             <div className="canvas-outer-container">
@@ -226,14 +285,13 @@ function Game (props) {
                 <UserList users={users} user={user} drawerId={drawerId} />
                 
                 <div ref={canvasParent} className="canvas-container">
-                    {words.length === 3 ? renderWordOptions() : (turnEnd === false ? renderCanvas() : renderScoreBoard())}
+                    { renderCanvasStatus() }
                 </div>
 
                 <GuessContainer socketRef={socketRef} />
 
             </div>
             {renderOptions()}
-            {/* {socketRef.current.id === drawerId ? renderOptions() : null} */}
         </div>
     );
 

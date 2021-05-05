@@ -53,12 +53,6 @@ function Canvas(props){
                 color: color
             }
             setDrawing(prev => [...prev, data])
-            // if(final.x && final.y){
-            //     drawLine(ctx, canvas, color, initial, final)
-            // }
-            // else{
-            //     drawLine(ctx, canvas, color, initial)
-            // }
         })
 
     }, [socketRef])
@@ -104,12 +98,12 @@ function Canvas(props){
                 x: element.initial.x * canvas.width,
                 y: element.initial.y * canvas.height
             }
-            if(Object.keys(element.final).length !== 0){
-                const final = {
-                    x: element.final.x * canvas.width,
-                    y: element.final.y * canvas.height
-                }
-               drawLine(ctx, canvas, element.color, initial, final)
+            const final = {
+                x: element.final.x * canvas.width,
+                y: element.final.y * canvas.height
+            }
+            if(final.x && final.y){
+                drawLine(ctx, canvas, element.color, initial, final)
             }
             else{
                 drawLine(ctx, canvas, element.color, initial)

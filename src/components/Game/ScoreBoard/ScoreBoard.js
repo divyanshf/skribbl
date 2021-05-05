@@ -3,7 +3,7 @@ import './ScoreBoard.css'
 function ScoreBoard({users, scoredUsers, word}){
 
     const renderScoreCard = (user, i) => {
-        const index = scoredUsers.findIndex((u) => u.id === user.id)
+        const index = scoredUsers.findIndex((u) => u === user.id)
         return (
             <div key={i} className="score-card">
                 <h5> {user.username} </h5>
