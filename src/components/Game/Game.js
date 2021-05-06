@@ -22,8 +22,6 @@ function Game (props) {
     const [finalScores, setFinalScores] = useState([])
     const [scoredUsers, setScoredUsers] = useState([])
     const [canvasStatus, setCanvasStatus] = useState('canvas')
-    // const [turnEnd, setTurnEnd] = useState(false)
-    // const [endgame, setEndgame] = useState([])
     const [drawerId, setDrawerId] = useState('')
     const [drawing, setDrawing] = useState([])
     const [words, setWords] = useState([])
@@ -42,6 +40,7 @@ function Game (props) {
 
         //  When a user joins
         socketRef.current.on('addUser', (u) => {
+            playAudio('join')
             setUsers(prev => {
                 return [...prev, u]
             })
@@ -54,6 +53,7 @@ function Game (props) {
 
         //  Update the score
         socketRef.current.on('updateScore', (u) => {
+            playAudio('playerGuessed')
             setUsers(prev => {
                 return prev.map((el) => el.id === u.id ? u : el)
             })
@@ -78,6 +78,7 @@ function Game (props) {
 
         //  Timer
         socketRef.current.on('timer', (counter)=>{
+            playAudio('tick')
             setTime(counter)
         })
         socketRef.current.on('end', (scoredUsers)=>{
@@ -96,6 +97,7 @@ function Game (props) {
             setRounds(round)
         })
         socketRef.current.on('endgame', (allUsers) => {
+            playAudio('roundEndSuccess')
             setFinalScores(allUsers.sort((a, b)=>{
                 return a.score >= b.score ? -1 : 1
             }))
@@ -131,6 +133,7 @@ function Game (props) {
 
         //  When a user leaves
         socketRef.current.on('removeUser', (u) => {
+            playAudio('leave')
             setUsers(prev => {
                 return prev.filter((el) => el.id !== u.id)
             })
@@ -153,6 +156,12 @@ function Game (props) {
         return unknown
     }
 
+    //  Play sounds
+    const playAudio = (filename) => {
+        let audio = new Audio(process.env.PUBLIC_URL + '/sounds/' + filename + '.ogg')
+        audio.play()
+    }
+
     //  Options handler
     const handleClear = (e) => {
         if(socketRef.current.id === drawerId){
@@ -164,6 +173,7 @@ function Game (props) {
 
     const handleWordSubmit = (w) => {
         socketRef.current.emit('chooseWord', w)
+        playAudio('roundStart')
         setWords([])
     }
 

@@ -9,6 +9,13 @@ function Join (props) {
     const [user, setUser] = useContext(UserContext)
     const [users, setUsers] = useContext(UsersContext)
     const [error, setError] = useState('')
+
+    //  Audio
+    const playAudio = () => {
+        let audio = new Audio(process.env.PUBLIC_URL + '/sounds/join.ogg')
+        audio.play()
+    }
+
     //  Handle input change
     const handleChange = (e) => {
         let {name, value} = e.target
@@ -31,6 +38,7 @@ function Join (props) {
                     setError('')
                     setGame(true)
                     setUsers(result.allUsers)
+                    playAudio(true)
                 }
             })
         }
