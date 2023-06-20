@@ -1,3 +1,6 @@
+_NOTE: Down because of heroku 😢. Will shift the backend to other platform soon._
+
+
 # SKRIBBL CLONE (Web)
 
 ## Description
