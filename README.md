@@ -1,5 +1,9 @@
-This repository is no longer maintained. I have worked on a more scalable approach to this as "Doodle".
+_Note: This repository is no longer maintained._
 
+--- 
 
-- Doodle Client - https://github.com/Experimentf/doodle-client
-- Doodle Server - https://github.com/Experimentf/doodle-server
+I have worked on a better and scalable replacement for this repo. You can find the details below.
+
+🎨 **Doodle**
+- Client - https://github.com/Experimentf/doodle-client
+- Server - https://github.com/Experimentf/doodle-server
