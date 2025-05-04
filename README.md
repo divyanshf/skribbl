@@ -1,4 +1,4 @@
-This repository is no longer maintainer. I have worked on a more scalable approach to this as "Doodle".
+This repository is no longer maintained. I have worked on a more scalable approach to this as "Doodle".
 
 
 - Doodle Client - https://github.com/Experimentf/doodle-client
